@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="passwoord.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Generate a <br><span>Random Password</span></h1>
+        <div class="display">
+            <input type="text" id="password" placeholder="Password">
+            <img src="images/copy.png" onclick="copypass()">
+        </div>
+        <button onclick="createpassword()"><img src="images/generate.png">Generate password</button>
+    </div>
+    <div id="print">
+    </div>
+    <script>
+        const passwordbox = document.getElementById("password");
+        const length= 12;
+        const up="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const low="abcdefghijklmnopqrstuvwxyz";
+        const number ="0123456789";
+        const sym = "!@#$%^&*(){}[]/?><+_-";
+        const allch=up+low+number+sym;
+    function createpassword(){
+        let pass="";
+        pass+=up[Math.floor(Math.random()*up.length)];
+        pass+=low[Math.floor(Math.random()*low.length)];
+        pass+=number[Math.floor(Math.random()*number.length)];
+        pass+=sym[Math.floor(Math.random()*sym.length)];
+        while(length>pass.length){
+            pass+=allch[Math.floor(Math.random()*allch.length)];
+        }
+        passwordbox.value=pass;
+        
+    }
+    function copypass()
+    {
+        const print=document.getElementById("print");
+        print.classList.add("output");
+        print.innerHTML="Password Copied";
+        setTimeout(()=>{
+            print.classList.remove("output");
+            print.innerHTML="";
+        },2000);
+        passwordbox.select();
+        var msg=document.execCommand("copy");
+    }
+
+    </script>
+
+</body>
+</html>
